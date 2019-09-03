@@ -1,0 +1,11 @@
+{
+  "autoload" : {
+    "psr-4" : {
+      "Classes\\": "Classes/",
+      "Interfaces\\": "Interfaces/"
+    }
+  },
+  "require-dev": {
+    "kint-php/kint": "^3.2"
+  }
+}

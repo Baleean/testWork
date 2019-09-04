@@ -27,14 +27,14 @@ class Cowshed
     private $chicken = [];
 
     /**
-     * @var integer $cowProduct Статическая переменная, содержащая общее количество собранной продукции от объектов
+     * @static integer $cowProduct Статическая переменная, содержащая общее количество собранной продукции от объектов
      * типа Cow за все время
      */
 
     private static $cowProduct;
 
     /**
-     * @var integer $chickenProduct Статическая переменная, содержащая общее количество собранной продукции от объектов
+     * @static integer $chickenProduct Статическая переменная, содержащая общее количество собранной продукции от объектов
      * типа Chicken за все время
      */
 
@@ -55,10 +55,16 @@ class Cowshed
     private $chickenProductToday;
 
     /**
-     * @var int $day Статическая перемнная - счетчик дней.
+     * @static int $day Статическая перемнная - счетчик дней.
      */
 
     private static $day = 1;
+
+    /**
+     * Cowshed constructor.
+     * @param array $animals Принимает массив ключ => значение, где ключ - имя класса, значение - количество
+     * объектов данного класса, по умолчанию Cow = 10, Chicken => 20
+     */
 
     public function __construct($animals = ['Cow' => 10, 'Chicken' => 20])
     {
@@ -70,6 +76,12 @@ class Cowshed
         }
     }
 
+    /**
+     * Метод принимает в качестве аргумента объект наследник класса Animal и вызывает функцию, соответствующую
+     * классу аргумента для создания объекта.
+     * @param Animal $animal
+     */
+
     public function addUnknownAnimal(Animal $animal)
     {
         if($animal instanceof Cow) {
@@ -79,15 +91,32 @@ class Cowshed
         }
     }
 
+    /**
+     * Метод добавляет в конец массива $this->cow очередной объект Cow
+     * @param Cow $cow
+     */
+
     public function addCow(Cow $cow)
     {
         $this->cow[] = $cow;
     }
 
+    /**
+     * Метод добавляет в конец массива $this->chicken очередной объект Chicken
+     * @param Chicken $chicken
+     */
+
     public function addChicken(Chicken $chicken)
     {
         $this->chicken[] = $chicken;
     }
+
+    /**
+     * Метод собирает продукцию со всех объектов из массива $this->cow, записывает полученные результаты в
+     * $this->cowProductToday, а также суммирует результаты с уже имеющимися в статическом свойстве self::$cowProduct
+     *
+     * @return string
+     */
 
     private function getProductsCow()
     {
@@ -97,6 +126,14 @@ class Cowshed
         self::$cowProduct += $this->cowProductToday;
         return self::$cowProduct . ' литров молока';
     }
+
+    /**
+     * Метод собирает продукцию со всех объектов из массива $this->chicken, записывает полученные результаты в
+     * $this->chickenProductToday, а также суммирует результаты с уже имеющимися в статическом свойстве
+     * self::$chickenProduct
+     *
+     * @return string
+     */
 
     private function getProductsChicken()
     {
@@ -108,6 +145,11 @@ class Cowshed
         return self::$chickenProduct . ' яиц';
     }
 
+    /**
+     * Метод формирует строку для вывода, содержащую количесвто продуктов, собранных за сутки
+     * @return string
+     */
+
     public function getProductToday()
     {
         $products = "Сегодня собрано: " . PHP_EOL;
@@ -115,6 +157,10 @@ class Cowshed
         $products .= $this->chickenProductToday . " яиц" . PHP_EOL;
         return $products;
     }
+
+    /**
+     * Метод выводит на экран полную информацию о собранных продуктах за сутки и общее количество собранных продуктов
+     */
 
     public function getAllProducts()
     {

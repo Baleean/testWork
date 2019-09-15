@@ -14,17 +14,6 @@ use Classes\Animals\Cow;
 
 class Cowshed
 {
-    /**
-     * @var array $cow Содержит массив объектов Cow
-     */
-
-    private $cow = [];
-
-    /**
-     * @var array $chicken Содержит массив объектов Chicken
-     */
-
-    private $chicken = [];
 
     /**
      * @static integer $cowProduct Статическая переменная, содержащая общее количество собранной продукции от объектов

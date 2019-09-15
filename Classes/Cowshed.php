@@ -17,6 +17,7 @@ class Cowshed
 {
     /**
      * @var array $cow Содержит массив объектов Cow
+     * Пытаюсь создать конфликт слияния
      */
 
     private $cow = [];
